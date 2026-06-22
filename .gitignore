@@ -1,0 +1,16 @@
+# Compiled Java files
+*.class
+
+# Log files
+*.log
+debug.log
+sample.log
+
+# Ignore log folders
+log/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+.DS_Store

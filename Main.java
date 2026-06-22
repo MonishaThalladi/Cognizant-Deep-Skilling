@@ -1,30 +1,79 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("=== EXERCISE 1: Inventory Management System ===\n");
+        System.out.println("=== EXERCISE 2: E-commerce Platform Search ===\n");
 
-        InventoryManager manager = new InventoryManager();
+        // Create sample products
+        ProductForSearch[] products = {
+            new ProductForSearch(1, "Laptop", "Electronics"),
+            new ProductForSearch(2, "Book", "Education"),
+            new ProductForSearch(3, "Phone", "Electronics"),
+            new ProductForSearch(4, "Shoes", "Fashion"),
+            new ProductForSearch(5, "Watch", "Accessories"),
+            new ProductForSearch(6, "Tablet", "Electronics"),
+            new ProductForSearch(7, "Headphones", "Accessories")
+        };
 
-        manager.addProduct(new Product(101, "Laptop", 10, 999.99));
-        manager.addProduct(new Product(102, "Mouse", 50, 29.99));
-        manager.addProduct(new Product(103, "Keyboard", 30, 79.99));
+        // Display all products
+        System.out.println("--- Available Products ---");
+        for (ProductForSearch p : products) {
+            System.out.println(p);
+        }
 
-        manager.displayAllProducts();
+        // ===== LINEAR SEARCH =====
+        System.out.println("\n--- Linear Search (O(n)) ---");
+        String searchTerm1 = "Book";
+        ProductForSearch found1 = SearchAlgorithms.linearSearch(products, searchTerm1);
+        System.out.println("Searching for: " + searchTerm1);
+        System.out.println("Result: " + (found1 != null ? found1 : "Not found"));
 
-        manager.updateProduct(102, 45, 25.99);
+        String searchTerm2 = "Camera";
+        ProductForSearch found2 = SearchAlgorithms.linearSearch(products, searchTerm2);
+        System.out.println("Searching for: " + searchTerm2);
+        System.out.println("Result: " + (found2 != null ? found2 : "Not found"));
 
-        Product found = manager.searchProduct(103);
-        System.out.println("\nFound: " + found);
+        // ===== BINARY SEARCH =====
+        System.out.println("\n--- Binary Search (O(log n)) ---");
+        // Sort products by name first
+        SearchAlgorithms.sortProductsByName(products);
 
-        manager.deleteProduct(101);
+        System.out.println("Products sorted by name:");
+        for (ProductForSearch p : products) {
+            System.out.println("  " + p.getProductName());
+        }
 
-        manager.displayAllProducts();
+        String searchTerm3 = "Phone";
+        ProductForSearch found3 = SearchAlgorithms.binarySearch(products, searchTerm3);
+        System.out.println("\nSearching for: " + searchTerm3);
+        System.out.println("Result: " + (found3 != null ? found3 : "Not found"));
 
+        String searchTerm4 = "Laptop";
+        ProductForSearch found4 = SearchAlgorithms.binarySearch(products, searchTerm4);
+        System.out.println("Searching for: " + searchTerm4);
+        System.out.println("Result: " + (found4 != null ? found4 : "Not found"));
+
+        // ===== ANALYSIS =====
         System.out.println("\n=== Complexity Analysis ===");
-        System.out.println("Add Product: O(1)");
-        System.out.println("Update Product: O(1)");
-        System.out.println("Delete Product: O(1)");
-        System.out.println("Search Product: O(1)");
-        System.out.println("Display All: O(n)");
-        System.out.println("\nHashMap is efficient for key-based operations.");
+        System.out.println("Linear Search:");
+        System.out.println("  - Best Case: O(1) (found at first position)");
+        System.out.println("  - Average Case: O(n) (found in middle)");
+        System.out.println("  - Worst Case: O(n) (found at end or not found)");
+        System.out.println("  - Suitable for: Small datasets or unsorted data");
+
+        System.out.println("\nBinary Search:");
+        System.out.println("  - Best Case: O(1) (found at middle)");
+        System.out.println("  - Average Case: O(log n) (very fast)");
+        System.out.println("  - Worst Case: O(log n) (still very fast)");
+        System.out.println("  - Suitable for: Large datasets (requires sorted data)");
+
+        System.out.println("\n=== Recommendation ===");
+        System.out.println("For a large e-commerce platform with millions of products,");
+        System.out.println("Binary Search is preferred because:");
+        System.out.println("1. It's much faster: O(log n) vs O(n)");
+        System.out.println("2. Products can be stored sorted by name");
+        System.out.println("3. Search results appear almost instantly");
+        System.out.println("\nHowever, Linear Search is still useful for:");
+        System.out.println("1. Small product catalogs");
+        System.out.println("2. When data is not sorted");
+        System.out.println("3. When performing quick, one-time searches");
     }
 }
