@@ -1,0 +1,8 @@
+com\example\controller\UserControllerPostTest.class
+com\example\service\UserServiceTest.class
+com\example\service\UserServiceExceptionTest.class
+com\example\IntegrationTest.class
+com\example\service\CalculatorServiceParameterizedTest.class
+com\example\service\CalculatorServiceTest.class
+com\example\controller\UserControllerExceptionTest.class
+com\example\controller\UserControllerTest.class
