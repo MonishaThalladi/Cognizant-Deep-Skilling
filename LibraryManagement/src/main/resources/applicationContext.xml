@@ -20,7 +20,9 @@
     <!-- Bean Definitions -->
     <bean id="bookRepository" class="com.library.repository.BookRepository"/>
 
+    <!-- Constructor Injection (Exercise 7) -->
     <bean id="bookService" class="com.library.service.BookService">
+        <constructor-arg ref="bookRepository"/>
         <property name="bookRepository" ref="bookRepository"/>
     </bean>
 
