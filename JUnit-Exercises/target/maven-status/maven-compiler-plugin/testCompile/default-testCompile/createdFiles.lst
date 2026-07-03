@@ -1,0 +1,12 @@
+com\example\OrderServiceTest.class
+com\example\CalculatorTest.class
+com\example\ExceptionThrowerTest.class
+com\example\AllTests.class
+com\example\AssertionsTest.class
+com\example\AAAPatternTest.class
+com\example\OrderedTests.class
+com\example\EvenCheckerTest.class
+com\example\TestClass1.class
+com\example\TestClass2.class
+com\example\CustomerServiceTest.class
+com\example\PerformanceTesterTest.class
