@@ -20,21 +20,20 @@
 
 ---
 
-📂 PROJECT STRUCTURE
+## 📂 PROJECT STRUCTURE
 
-Cognizant-Deep-Skilling/
-│
-├── DSA-Exercises/               # Data Structures & Algorithms
-├── Design-Patterns/             # Design Patterns & SOLID Principles
-├── Git-Exercises/               # Git Version Control
-├── JUnit-Exercises/             # JUnit, Mockito, SLF4J Testing
-├── PLSQL-Exercises/             # PL/SQL Programming
-├── LibraryManagement/           # Spring Core (XML Config)
-├── LibraryManagementBoot/       # Spring Boot + JPA + REST APIs
-├── Spring-Testing-Exercises/    # Spring Testing
-├── EmployeeManagementSystem/    # Employee Management (JPA)
-└── .gitignore
-
+| Folder | Description |
+|--------|-------------|
+| `DSA-Exercises/` | Data Structures & Algorithms |
+| `Design-Patterns/` | Design Patterns & SOLID Principles |
+| `Git-Exercises/` | Git Version Control |
+| `JUnit-Exercises/` | JUnit, Mockito & SLF4J Testing |
+| `PLSQL-Exercises/` | PL/SQL Programming |
+| `LibraryManagement/` | Spring Core (XML Configuration) |
+| `LibraryManagementBoot/` | Spring Boot + JPA + REST APIs |
+| `Spring-Testing-Exercises/` | Spring Testing |
+| `EmployeeManagementSystem/` | Employee Management (JPA) |
+| `.gitignore` | Git Ignore File |
 ---
 
 📌 TOPICS COVERED
