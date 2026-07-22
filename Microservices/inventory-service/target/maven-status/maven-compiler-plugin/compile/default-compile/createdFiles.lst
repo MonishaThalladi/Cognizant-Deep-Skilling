@@ -1,0 +1,6 @@
+com\microservices\inventory\client\ProductClient.class
+com\microservices\inventory\config\WebClientConfig.class
+com\microservices\inventory\entity\Inventory.class
+com\microservices\inventory\repository\InventoryRepository.class
+com\microservices\inventory\InventoryServiceApplication.class
+com\microservices\inventory\controller\InventoryController.class
