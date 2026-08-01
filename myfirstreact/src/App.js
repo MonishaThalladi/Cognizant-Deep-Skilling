@@ -1,88 +1,74 @@
-import React, { useReducer } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 
-// Reducer function
-const counterReducer = (state, action) => {
-  switch (action.type) {
-    case 'INCREMENT':
-      return { count: state.count + 1 };
-    case 'DECREMENT':
-      return { count: state.count - 1 };
-    case 'RESET':
-      return { count: 0 };
-    default:
-      return state;
-  }
-};
+// Create Theme Context
+const ThemeContext = createContext();
 
-function App() {
-  const [state, dispatch] = useReducer(counterReducer, { count: 0 });
+// Theme Provider
+function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState('light');
+
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
 
   return (
-    <div style={{ 
-      padding: '20px', 
-      fontFamily: 'Arial', 
-      maxWidth: '400px', 
-      margin: '0 auto', 
-      textAlign: 'center' 
-    }}>
-      <h1>React Exercise 12: useReducer</h1>
-      
-      <div style={{ 
-        backgroundColor: '#f8f9fa', 
-        padding: '30px', 
-        borderRadius: '12px',
-        boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-      }}>
-        <h2 style={{ fontSize: '48px', margin: '0' }}>{state.count}</h2>
-        
-        <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginTop: '20px' }}>
-          <button 
-            onClick={() => dispatch({ type: 'INCREMENT' })}
-            style={{
-              padding: '12px 24px',
-              backgroundColor: '#28a745',
-              color: 'white',
-              border: 'none',
-              borderRadius: '6px',
-              cursor: 'pointer',
-              fontSize: '16px'
-            }}
-          >
-            ➕ Increment
-          </button>
-          
-          <button 
-            onClick={() => dispatch({ type: 'DECREMENT' })}
-            style={{
-              padding: '12px 24px',
-              backgroundColor: '#dc3545',
-              color: 'white',
-              border: 'none',
-              borderRadius: '6px',
-              cursor: 'pointer',
-              fontSize: '16px'
-            }}
-          >
-            ➖ Decrement
-          </button>
-          
-          <button 
-            onClick={() => dispatch({ type: 'RESET' })}
-            style={{
-              padding: '12px 24px',
-              backgroundColor: '#6c757d',
-              color: 'white',
-              border: 'none',
-              borderRadius: '6px',
-              cursor: 'pointer',
-              fontSize: '16px'
-            }}
-          >
-            🔄 Reset
-          </button>
-        </div>
-      </div>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+// Custom Hook to use Theme
+function useTheme() {
+  return useContext(ThemeContext);
+}
+
+// Themed Component
+function ThemedComponent() {
+  const { theme, toggleTheme } = useTheme();
+
+  const styles = {
+    light: {
+      backgroundColor: '#ffffff',
+      color: '#000000',
+      border: '2px solid #ddd'
+    },
+    dark: {
+      backgroundColor: '#333333',
+      color: '#ffffff',
+      border: '2px solid #666'
+    }
+  };
+
+  return (
+    <div style={styles[theme]}>
+      <h2>Themed Component</h2>
+      <p>Current Theme: <strong>{theme}</strong></p>
+      <button 
+        onClick={toggleTheme}
+        style={{
+          padding: '10px 20px',
+          backgroundColor: theme === 'light' ? '#333' : '#fff',
+          color: theme === 'light' ? '#fff' : '#333',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer'
+        }}
+      >
+        Switch to {theme === 'light' ? 'Dark' : 'Light'} Theme
+      </button>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <div style={{ padding: '20px', fontFamily: 'Arial', maxWidth: '600px', margin: '0 auto' }}>
+        <h1>React Exercise 13: Context API</h1>
+        <ThemedComponent />
+      </div>
+    </ThemeProvider>
   );
 }
 
