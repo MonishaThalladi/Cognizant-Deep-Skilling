@@ -1,35 +1,47 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 function App() {
-  // Array of items
-  const fruits = [
-    { id: 1, name: 'Apple', color: 'Red' },
-    { id: 2, name: 'Banana', color: 'Yellow' },
-    { id: 3, name: 'Orange', color: 'Orange' },
-    { id: 4, name: 'Grapes', color: 'Purple' },
-    { id: 5, name: 'Mango', color: 'Yellow' },
-  ];
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch data when component loads
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/posts')
+      .then(response => response.json())
+      .then(data => {
+        setPosts(data.slice(0, 10)); // Get only first 10 posts
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial' }}>
-      <h1>React Exercise 5: Lists and Keys</h1>
+      <h1>React Exercise 9: Calling API with Fetch</h1>
       
-      <h2>Fruits List</h2>
-      <ul style={{ listStyleType: 'none', padding: 0 }}>
-        {fruits.map((fruit) => (
-          <li key={fruit.id} style={{
-            backgroundColor: '#f0f8ff',
-            padding: '12px',
-            margin: '8px 0',
-            borderRadius: '8px',
-            border: '2px solid #007bff'
-          }}>
-            <strong>{fruit.name}</strong> - Color: {fruit.color}
-          </li>
-        ))}
-      </ul>
-      
-      <p>Total Fruits: <strong>{fruits.length}</strong></p>
+      {loading ? (
+        <p>Loading posts...</p>
+      ) : (
+        <div>
+          <p>Showing {posts.length} posts from JSONPlaceholder API</p>
+          {posts.map(post => (
+            <div key={post.id} style={{
+              backgroundColor: '#f8f9fa',
+              padding: '15px',
+              margin: '10px 0',
+              borderRadius: '8px',
+              border: '1px solid #ddd'
+            }}>
+              <h3>{post.title}</h3>
+              <p>{post.body}</p>
+              <small>Post ID: {post.id}</small>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
