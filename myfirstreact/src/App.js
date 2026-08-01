@@ -1,35 +1,88 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import Home from './Home';
-import About from './About';
-import Contact from './Contact';
+import React, { useReducer } from 'react';
+
+// Reducer function
+const counterReducer = (state, action) => {
+  switch (action.type) {
+    case 'INCREMENT':
+      return { count: state.count + 1 };
+    case 'DECREMENT':
+      return { count: state.count - 1 };
+    case 'RESET':
+      return { count: 0 };
+    default:
+      return state;
+  }
+};
 
 function App() {
-  return (
-    <BrowserRouter>
-      <div style={{ padding: '20px', fontFamily: 'Arial' }}>
-        <h1>React Exercise 11: React Router</h1>
-        
-        {/* Navigation */}
-        <nav style={{
-          backgroundColor: '#f8f9fa',
-          padding: '15px',
-          borderRadius: '8px',
-          marginBottom: '20px'
-        }}>
-          <Link to="/" style={{ marginRight: '15px', textDecoration: 'none', color: '#007bff' }}>Home</Link>
-          <Link to="/about" style={{ marginRight: '15px', textDecoration: 'none', color: '#007bff' }}>About</Link>
-          <Link to="/contact" style={{ textDecoration: 'none', color: '#007bff' }}>Contact</Link>
-        </nav>
+  const [state, dispatch] = useReducer(counterReducer, { count: 0 });
 
-        {/* Pages */}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+  return (
+    <div style={{ 
+      padding: '20px', 
+      fontFamily: 'Arial', 
+      maxWidth: '400px', 
+      margin: '0 auto', 
+      textAlign: 'center' 
+    }}>
+      <h1>React Exercise 12: useReducer</h1>
+      
+      <div style={{ 
+        backgroundColor: '#f8f9fa', 
+        padding: '30px', 
+        borderRadius: '12px',
+        boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+      }}>
+        <h2 style={{ fontSize: '48px', margin: '0' }}>{state.count}</h2>
+        
+        <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginTop: '20px' }}>
+          <button 
+            onClick={() => dispatch({ type: 'INCREMENT' })}
+            style={{
+              padding: '12px 24px',
+              backgroundColor: '#28a745',
+              color: 'white',
+              border: 'none',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              fontSize: '16px'
+            }}
+          >
+            ➕ Increment
+          </button>
+          
+          <button 
+            onClick={() => dispatch({ type: 'DECREMENT' })}
+            style={{
+              padding: '12px 24px',
+              backgroundColor: '#dc3545',
+              color: 'white',
+              border: 'none',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              fontSize: '16px'
+            }}
+          >
+            ➖ Decrement
+          </button>
+          
+          <button 
+            onClick={() => dispatch({ type: 'RESET' })}
+            style={{
+              padding: '12px 24px',
+              backgroundColor: '#6c757d',
+              color: 'white',
+              border: 'none',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              fontSize: '16px'
+            }}
+          >
+            🔄 Reset
+          </button>
+        </div>
       </div>
-    </BrowserRouter>
+    </div>
   );
 }
 
